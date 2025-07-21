@@ -1,2 +1,4 @@
 # My Arch Linux Installation with Sway Window Manager
-A personal guide and collection of installation steps, configurations, and dotfiles showcasing my Arch Linux setup with Sway. This repo reflects my custom choices for apps, settings, and tweaks—tailored to how I use and enjoy my system. Feel free to explore, adapt, and make it your own!
+
+1️⃣ An Arch Linux ISO file should be downloaded. It is better to [download](https://archlinux.org/download/) the file from the Arch's recommended way (R
+
