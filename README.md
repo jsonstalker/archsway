@@ -51,7 +51,7 @@ ip addr show
 ```
 In my case the name was `wlan0`. Now run the `iwctl` command. It will activate another command prompt that's dedicated to Wi-Fi.:
 ```bash
-itctl
+iwctl
 ```
 In the new command prompt run to view available Wi-Fi networks:
 ```bash
