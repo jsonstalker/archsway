@@ -31,10 +31,51 @@ cat /sys/firmware/efi/fw_platform_size
 
 If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your motherboard's manual. 
 ### 1.6 Connect to the internet
-
-1. Check if your network interface [^2] is listed or enabled by entering the following command:
+If you're connected through a cable you might already have network connectivity. If you want to connect to a Wi-Fi, make sure the card is not blocked with rfkill. First run the `rfkill` command to check the current status:
+```bash
+rfkill
+```
+Expected output:
+```bash
+ID TYPE      DEVICE      SOFT      HARD
+ 0 bluetooth hci0   unblocked unblocked
+ 1 wlan      phy0   unblocked unblocked
+```
+If it was *hard-blocked* toggle the hardware button to unblock it. If it was *soft-blocked* run the following command to unblock it:
+```bash
+rfkill unblock wlan
+```
+Now run the following command to get the interface name for the Wi-Fi:
 ```bash
 ip addr show
+```
+In my case the name was `wlan0`. Now run the `iwctl` command. It will activate another command prompt that's dedicated to Wi-Fi.:
+```bash
+itctl
+```
+In the new command prompt run to view available Wi-Fi networks:
+```bash
+station wlan0 get-networks
+```
+Expected output:
+```bash
+                                     Available networks
+------------------------------------------------------------------------------------
+        Network name                Security                  Signal
+------------------------------------------------------------------------------------
+        Narnia                      psk                      *****
+        Dimension X                 psk                      *****
+        Atlantis                    psk                      *****
+        Galaxy                      psk                      *****
+------------------------------------------------------------------------------------
+```
+Now exit the `iwctl` commnad prompt:
+```bash
+exit
+```
+Run the following command to connect to your desired Wi-Fi network. For example, to connect to *Narnia*:
+```bash
+iwctl --passphrase "1234" station wlan0 connect Narnia
 ```
 [^1]: Common BIOS keys by brand:  
     | Manufacturer                | Key(s)                                           |
@@ -55,5 +96,3 @@ ip addr show
     | **Samsung**                 | `F2`                                               |
     | **Toshiba**                 | `F2`                                               |
     | **Zotac**                   | `DEL`                                              |
-[^2]: If you're connected through a cable you might already have network connectivity.
-
