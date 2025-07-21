@@ -1,4 +1,4 @@
-# <img src="./arch_linux.png" width="30" />Arch Linux Installation with Sway Window Manager
+# <img src="./arch_linux.png" width="30" /> Arch Linux + Sway Installation Guide
 
 ## 1. Pre-installation
 ### 1.1 Download an installation image
