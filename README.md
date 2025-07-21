@@ -77,7 +77,7 @@ Run the following command to connect to your desired Wi-Fi network. For example,
 ```bash
 iwctl --passphrase "1234" station wlan0 connect Narnia
 ```
-[^1]: Common BIOS keys by brand:  
+[^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
     | **ASRock**                  | `F2` or `DEL`                                        |
