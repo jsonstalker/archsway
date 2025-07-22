@@ -1,4 +1,4 @@
-# <img src="./arch_linux.png" width="30" /> Arch Linux + Sway Installation Guide
+# <img src="./arch_linux.png" width="30" /> **My** Arch Linux + Sway Installation Guide
 <img src="./archlinux-logo-dark-1200dpi.png" />
 
 Sources:
@@ -87,7 +87,7 @@ ping archlinux.org
 I created three partitions on my disk:
 * EFI (boot) partition: Required for UEFI systems to store boot files.
 * Swap partition: Used as virtual memory to supplement physical RAM.
-* Linux filesystem (root) partition: The main partition where the operating system and applications are installed.
+* Linux filesystem (root) partition: The main partition where the operating system and applications are installed. I have encrypted this partition and I'll show you how to do it.
 
 You can create additional partitions if you need—for example, a separate /home for user files or more specialized layouts depending on your workflow and storage needs.
 
@@ -106,10 +106,30 @@ fdisk /dev/nvme0n1
 In the new command prompt write `g` and press `Enter` to create a new empty GPT partition table.
 
 For creating the EFI partition: 
-1. Write `n` and press `Enter`.
-2. Press `Enter` to accept the default partition number (number 1).
+1. Write `n` and press `Enter` to add a new partition.
+2. Press `Enter` to accept the default partition number or enter number 1.
 3. Press `Enter` to accept the default first sector.
-4. For the Last Sector or Size write `+1G` and press `Enter`.
+4. For the Last Sector or Size write `+1G` and press `Enter`. If it asks you to remove the signature or not write `Y` and press `Enter`.
+5. Now that the partiton is added, in the fdisk command prompt type `t` and press `Enter` to change the partition type.
+6. Choose the partition by typing a number (number 1) or just `Enter` to choose the default partition.
+7. It wants you to choose a name. Type `1` and press `Enter`.
+
+For creating the SWAP partition:
+1. Write `n` and press `Enter` to add a new partition.
+2. Press `Enter` to accept the default partition number or enter number 2.
+3. Press `Enter` to accept the default first sector.
+4. For the Last Sector or Size write `+4G` and press `Enter`. If it asks you to remove the signature or not write `Y` and press `Enter`.
+5. In the fdisk command prompt type `t` and press `Enter` to change the partition type.
+6. Choose the partition by typing a number (number 2) or just `Enter` to choose the default partition.
+7. It wants you to choose a name. Type `19` and press `Enter`.
+
+For creating the Linux filesystem (root) partition:
+
+1. Write `n` and press `Enter` to add a new partition.
+2. Press `Enter` to accept the default partition number (number 3).
+3. Press `Enter` to accept the default first sector.
+4. For the last sector or size, simply press Enter to allocate all remaining available space to this partition.
+### 1.8 
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
