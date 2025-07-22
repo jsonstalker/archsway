@@ -77,6 +77,22 @@ Run the following command to connect to your desired Wi-Fi network. For example,
 ```bash
 iwctl --passphrase "1234" station wlan0 connect Narnia
 ```
+Now verify the connection:
+```bash
+ping archlinux.org
+```
+### 1.7 Partition the disks
+Find out what is your disk's name:
+```bash
+lsblk
+```
+```bash
+lsblk
+```
+The disk should be wiped at first:
+```bash
+wipefs -a /dev/nvme0n1
+```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
