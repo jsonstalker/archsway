@@ -6,10 +6,12 @@
  
 Sources:
 * [Installation guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide)
+* [Arch Linux: An 𝔼𝕟𝕔𝕣𝕪𝕡𝕥𝕖𝕕 Guide](https://youtu.be/kXqk91R4RwU?si=1yv3FowmuQ-yczeG)
+* [How to Install Arch Linux: Step-by-Step Guide](https://youtu.be/FxeriGuJKTM?si=CjofZtAmX6EIGYZT)
 ## 1. Pre-installation
-### 1.1 Download an installation image
+### 1.1. Download an installation image
 An Arch Linux ISO file should be downloaded. It is recommended to download the Arch Linux ISO file from the [official Arch Linux download page](https://archlinux.org/download/) using BitTorrent, as suggested by the website.
-### 1.2 Verify signature (optional but strongly recommended)
+### 1.2. Verify signature (optional but strongly recommended)
 A PGP Signature file also can be downloaded for checking the integrity and authenticity of the ISO file. This file is located on the [Checksums and signatures](https://archlinux.org/download/#checksums) section of the page. Now download the [GnuPG](https://gnupg.org/download/index.html) software and install it. If you're on Windows you should download and install the [GPG4WIN](https://gpg4win.org/download.html) software. The PGP Signature file should be placed on the same directory as the ISO file. Now open a terminal in that directory and run the following command:
 ``` bash
 gpg --keyserver-options auto-key-retrieve --verify archlinux-_version_-x86_64.iso.sig
@@ -19,13 +21,13 @@ After running the command:
 * Compare the key fingerprint shown to the [official Arch Linux developer signing keys](https://archlinux.org/master-keys/).
 * If it matches, the ISO is verified.
 * If you see “BAD signature” or fingerprints do not match, do not use the ISO
-### 1.3 Prepare an installation medium
+### 1.3. Prepare an installation medium
 Plug in a USB flash drive and write the ISO file to it using an app like [Balena Etcher](https://etcher.balena.io/). Now the flash drive is bootable.
-### 1.4 Boot the live environment
+### 1.4. Boot the live environment
 Now reboot your system and open the UEFI (BIOS) firmware setup by pressing the respective key (for me it's F2[^1]). Disable **Secure Boot** (usually found in the Security tab). Also navigate to the boot tab and move the flash drive to the top of the boot order. Save the settings. Your PC will now boot into the live environment.
 
 After a bit of time the installation bootloader will appear. Select *Arch Linux install medium* and press `Enter`. You will be logged in on virtual console.
-### 1.5 Verify the boot mode
+### 1.5. Verify the boot mode
 To verify the boot mode, check the UEFI bitness:
 ``` bash
 cat /sys/firmware/efi/fw_platform_size
@@ -35,7 +37,7 @@ cat /sys/firmware/efi/fw_platform_size
 * If it returns No such file or directory, the system may be booted in BIOS (or CSM) mode.
 
 If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your motherboard's manual. 
-### 1.6 Connect to the internet
+### 1.6. Connect to the internet
 If you're connected through a cable you might already have network connectivity. If you want to connect to a Wi-Fi, make sure the card is not blocked with rfkill. First run the `rfkill` command to check the current status:
 ```bash
 rfkill
@@ -86,7 +88,7 @@ Now verify the connection:
 ```bash
 ping archlinux.org
 ```
-### 1.7 Partition the disks
+### 1.7. Partition the disks
 I created three partitions on my disk:
 * EFI (boot) partition: Required for UEFI systems to store boot files.
 * Swap partition: Used as virtual memory to supplement physical RAM.
@@ -132,7 +134,7 @@ Create the Linux filesystem (root) partition:
 2. Press `Enter` to accept the default partition number (number 3).
 3. Press `Enter` to accept the default first sector.
 4. For the last sector or size, simply press Enter to allocate all remaining available space to this partition.
-### 1.8 Format the partitions
+### 1.8. Format the partitions
 The partitions that are created should be formatted. 
 
 Format the EFI partition:
@@ -160,7 +162,7 @@ cryptsetup open /dev/nvme0n1p3 cryptroot #the cryptroot name is optional
 ```bash
 mkfs.ext4 /dev/mapper/cryptroot
 ```
-### 1.9 Mount the file systems
+### 1.9. Mount the file systems
 1. Mount the unlocked (decrypted) root partition:
 ```bash
 mount /dev/mapper/cryptroot /mnt
@@ -178,6 +180,8 @@ mount /dev/nvme0n1p1/ /mnt/boot
 swapon /dev/nvme0n1p2
 ```
 5. Run `lsblk` and check your partitions.
+## 2. Installation
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
