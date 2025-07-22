@@ -117,7 +117,7 @@ Create the EFI partition:
 6. Choose the partition by typing a number (number 1) or just `Enter` to choose the default partition.
 7. It wants you to choose a name. Type `1` and press `Enter`.
 
-Create the SWAP partition:
+Create the swap partition:
 1. Write `n` and press `Enter` to add a new partition.
 2. Press `Enter` to accept the default partition number or enter number 2.
 3. Press `Enter` to accept the default first sector.
@@ -139,7 +139,7 @@ Format the EFI partition:
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
 ```
-Format the SWAP partition run:
+Format the swap partition run:
 ```bash
 mkswap /dev/nvme0n1p2
 ```
@@ -173,7 +173,7 @@ mkdir -p /mnt/boot
 ```bash
 mount /dev/nvme0n1p1/ /mnt/boot
 ```
-4. Activate the SWAP partition:
+4. Activate the swap partition:
 ```bash
 swapon /dev/nvme0n1p2
 ```
