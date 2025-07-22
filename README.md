@@ -1,5 +1,6 @@
 # <img src="./arch_linux.png" width="30" /> Arch Linux + Sway Installation Guide
 <img src="./archlinux-logo-dark-1200dpi.png" />
+
 Sources:
 * [Installation guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide)
 ## 1. Pre-installation
