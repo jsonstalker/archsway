@@ -43,7 +43,7 @@ If you're connected through a cable you might already have network connectivity.
 rfkill
 ```
 Expected output:
-```bash
+```text
 ID TYPE      DEVICE      SOFT      HARD
  0 bluetooth hci0   unblocked unblocked
  1 wlan      phy0   unblocked unblocked
@@ -65,7 +65,7 @@ In the new command prompt run to view available Wi-Fi networks:
 station wlan0 get-networks
 ```
 Expected output:
-```bash
+```text
                                      Available networks
 ------------------------------------------------------------------------------------
         Network name                Security                  Signal
@@ -212,7 +212,7 @@ To check that the date is set correctly run:
 ```bash
 date
 ```
-### 3.4 Localization
+### 3.4. Localization
 Edit `/etc/locale.gen`, uncomment `en_US.UTF-8 UTF-8` and any other needed UTF-8 locales, then generate them with:
 ```bash
 locale-gen
@@ -233,7 +233,21 @@ For local resolution, add your hostname to `/etc/hosts`:
 127.0.1.1   yourhostname
 ```
 This ensures your system has a consistent and identifiable name on the network.
-.
+### 3.6. Adding user and setting password
+Run the following command:
+```bash
+EDITOR=nano visudo
+```
+Go all the way to the bottom and look for the line that says `# %wheel ALL=(ALL:ALL) ALL` and uncomment it. Press `Ctrl` + `O` and press `Enter` and then press `Ctrl` + `X` to exit the editor.
+
+Now add the a use:
+```bash
+useradd -m -G wheel -s /bin/bash john
+```
+Set a password for it:
+```bash
+passwd john
+```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
