@@ -100,7 +100,7 @@ lsblk
 ```
 Now wipe the disk:
 ```bash
-wipefs -a /dev/diskname # 
+wipefs -a /dev/diskname
 ```
 Run the fdisk command on your disk to open fdisk command prompt for that disk:
 ```bash
@@ -108,7 +108,7 @@ fdisk /dev/nvme0n1
 ```
 In the new command prompt write `g` and press `Enter` to create a new empty GPT partition table.
 
-For creating the EFI partition: 
+Create the EFI partition: 
 1. Write `n` and press `Enter` to add a new partition.
 2. Press `Enter` to accept the default partition number or enter number 1.
 3. Press `Enter` to accept the default first sector.
@@ -117,7 +117,7 @@ For creating the EFI partition:
 6. Choose the partition by typing a number (number 1) or just `Enter` to choose the default partition.
 7. It wants you to choose a name. Type `1` and press `Enter`.
 
-For creating the SWAP partition:
+Create the SWAP partition:
 1. Write `n` and press `Enter` to add a new partition.
 2. Press `Enter` to accept the default partition number or enter number 2.
 3. Press `Enter` to accept the default first sector.
@@ -126,13 +126,58 @@ For creating the SWAP partition:
 6. Choose the partition by typing a number (number 2) or just `Enter` to choose the default partition.
 7. It wants you to choose a name. Type `19` and press `Enter`.
 
-For creating the Linux filesystem (root) partition:
+Create the Linux filesystem (root) partition:
 
 1. Write `n` and press `Enter` to add a new partition.
 2. Press `Enter` to accept the default partition number (number 3).
 3. Press `Enter` to accept the default first sector.
 4. For the last sector or size, simply press Enter to allocate all remaining available space to this partition.
-### 1.8 
+### 1.8 Format the partitions
+The partitions that are created should be formatted. 
+
+Format the EFI partition:
+```bash
+mkfs.fat -F32 /dev/nvme0n1p1
+```
+Format the SWAP partition run:
+```bash
+mkswap /dev/nvme0n1p2
+```
+**Do not format the root partition immediately**. Instead, encrypt it first with LUKS, open the encrypted container, and then format it (typically with ext4):
+1. Encrypt:
+```bash
+cryptsetup luksFormat /dev/nvme0n1p3
+```
+After entering the command it asks if your're sure you want to overwrite the data on _nvme0n1_ or not. Write `YES` and hit `Enter`.
+
+Now enter a passphrase for your partition and press `Enter`.
+
+2. Open:
+```bash
+cryptsetup open /dev/nvme0n1p3 cryptroot #the cryptroot name is optional
+```
+3. Format:
+```bash
+mkfs.ext4 /dev/mapper/cryptroot
+```
+### 1.9 Mount the file systems
+1. Mount the unlocked (decrypted) root partition:
+```bash
+mount /dev/mapper/cryptroot /mnt
+```
+2. Create the boot mount point:
+```bash
+mkdir -p /mnt/boot
+```
+3. Mount the EFI partition:
+```bash
+mount /dev/nvme0n1p1/ /mnt/boot
+```
+4. Activate the SWAP partition:
+```bash
+swapon /dev/nvme0n1p2
+```
+5. Run `lsblk` and check your partitions.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
