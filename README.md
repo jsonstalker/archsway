@@ -181,7 +181,59 @@ swapon /dev/nvme0n1p2
 ```
 5. Run `lsblk` and check your partitions.
 ## 2. Installation
-
+Now that the system is prepared, you need to install the necessary files onto your new root partition. Use the `pacstrap` command to download and install the base system into the /mnt directory from Arch Linux repositories:
+```bash
+pacstrap /mnt base linux linux-firmware intel-ucode e2fsprogs dosfstools grub efibootmgr sudo base-devel linux-headers linux-lts linux-lts-headers sof-firmware networkmanager nano nvim man-db man-pages
+```
+* Replace `intel-ucode` with `amd-ucode` if you have an AMD processor.
+* This command includes both standard and LTS kernels, essential system tools, editors, documentation, and bootloader packages.
+## 3. Configure the system
+### 3.1. Fstab
+To get needed file systems (like the one used for the boot directory /boot) mounted on startup, generate an fstab file:
+```bash
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+### 3.2 Chroot
+To directly interact with the new system's environment, tools, and configurations for the next steps as if you were booted into it, change root into the new system:
+```bash
+arch-chroot /mnt
+```
+### 3.3. Time
+For human convenience (e.g. showing the correct local time or handling Daylight Saving Time), set the time zone:
+```bash
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+```
+* You can find your region and city by listing the directories in `/usr/share/zoneinfo`. Use the `ls` command to browse and locate the appropriate timezone (for example, `ls /usr/share/zoneinfo/Europe`).
+Run `hwclock` to generate /etc/adjtime:
+```bash
+hwclock --systohc
+```
+To check that the date is set correctly run:
+```bash
+date
+```
+### 3.4 Localization
+Edit `/etc/locale.gen`, uncomment `en_US.UTF-8 UTF-8` and any other needed UTF-8 locales, then generate them with:
+```bash
+locale-gen
+```
+Create `/etc/locale.conf` and set the system language:
+```text
+LANG=en_US.UTF-8
+```
+### 3.5. Network configuration
+Set your system hostname by creating `/etc/hostname` with your chosen name:
+```bash
+echo yourhostname > /etc/hostname
+```
+For local resolution, add your hostname to `/etc/hosts`:
+```text
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1   yourhostname
+```
+This ensures your system has a consistent and identifiable name on the network.
+.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
