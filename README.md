@@ -84,17 +84,32 @@ Now verify the connection:
 ping archlinux.org
 ```
 ### 1.7 Partition the disks
-Find out what is your disk's name:
+I created three partitions on my disk:
+* EFI (boot) partition: Required for UEFI systems to store boot files.
+* Swap partition: Used as virtual memory to supplement physical RAM.
+* Linux filesystem (root) partition: The main partition where the operating system and applications are installed.
+
+You can create additional partitions if you need—for example, a separate /home for user files or more specialized layouts depending on your workflow and storage needs.
+
+First, you should find out the disk name with the following command. In my case it's _nvme0n1_:
 ```bash
 lsblk
 ```
+Now wipe the disk:
 ```bash
-lsblk
+wipefs -a /dev/diskname # 
 ```
-The disk should be wiped at first:
+Run the fdisk command on your disk to open fdisk command prompt for that disk:
 ```bash
-wipefs -a /dev/nvme0n1
+fdisk /dev/nvme0n1
 ```
+In the new command prompt write `g` and press `Enter` to create a new empty GPT partition table.
+
+For creating the EFI partition: 
+1. Write `n` and press `Enter`.
+2. Press `Enter` to accept the default partition number (number 1).
+3. Press `Enter` to accept the default first sector.
+4. For the Last Sector or Size write `+1G` and press `Enter`.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
