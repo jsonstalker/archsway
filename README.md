@@ -240,7 +240,7 @@ EDITOR=nano visudo
 ```
 Go all the way to the bottom and look for the line that says `# %wheel ALL=(ALL:ALL) ALL` and uncomment it. Press `Ctrl` + `O` and press `Enter` and then press `Ctrl` + `X` to exit the editor.
 
-Now add the a use:
+Now add a user:
 ```bash
 useradd -m -G wheel -s /bin/bash john
 ```
