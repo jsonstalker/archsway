@@ -1,5 +1,8 @@
-# <img src="./arch_linux.png" width="30" /> **My** Arch Linux + Sway Installation Guide
-<img src="./archlinux-logo-dark-1200dpi.png" />
+**My** Arch Linux + Sway Installation Guide
+<div style="display:flex; flex-direction: row">
+ <img src="./archlinux-logo-dark-1200dpi.png" />
+ <img src="./sway-logo.png" />
+</div>
 
 Sources:
 * [Installation guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide)
