@@ -267,9 +267,9 @@ After saving the file, regenerate the initramfs to apply changes:
 ```bash
 mkinitcpio -P
 ```
-### 3.8. Setting Up GRUB with Encrypted Root
+### 3.8. Setting Up GRUB
 Follow these steps to configure GRUB for an encrypted root partition on a UEFI system.
-1. Install GRUB for UEFI
+#### 3.8.1. Install GRUB for UEFI
 
 Run:
 
@@ -278,7 +278,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=[BOOTLOAD
 ```
 * Replace [BOOTLOADER_ID] with a name like GRUB.
 * Change /dev/nvme0n1 if your main disk differs.
-2. Retrieve Partition UUIDs
+#### 3.8.2. Retrieve Partition UUIDs
 
 Get the UUID for your encrypted partition and the decrypted root:
 ```bash
@@ -286,13 +286,13 @@ blkid -o value -s UUID /dev/nvme0n1p3         # Encrypted partition UUID
 blkid -o value -s UUID /dev/mapper/cryptroot  # Decrypted (opened) root UUID
 ```
 Tip: Review the output in the terminal for accuracy.
-3. Append UUID Output for Easy Access
+#### 3.8.3. Append UUID Output for Easy Access
 Send the UUIDs to the end of your GRUB config file:
 ```bash
 blkid -o value -s UUID /dev/nvme0n1p3 >> /etc/default/grub
 blkid -o value -s UUID /dev/mapper/cryptroot >> /etc/default/grub
 ```
-4. Edit the GRUB Configuration
+#### 3.8.4. Edit the GRUB Configuration
 Open the configuration file:
 ```bash
 nano /etc/default/grub
@@ -314,7 +314,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=abcd1234-ef56-...:cryptroot r
 Remove the UUID lines from the end of the file to keep things tidy.
 
 Save changes (Ctrl+O, Enter), then exit (Ctrl+X).
-5. Regenerate GRUB Configuration
+#### 3.8.5. Regenerate GRUB Configuration
 Apply the changes with:
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
