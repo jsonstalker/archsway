@@ -102,7 +102,7 @@ lsblk
 ```
 Now wipe the disk:
 ```bash
-wipefs -a /dev/diskname
+wipefs -a /dev/nvme0n1
 ```
 Run the fdisk command on your disk to open fdisk command prompt for that disk:
 ```bash
@@ -183,7 +183,7 @@ swapon /dev/nvme0n1p2
 ## 2. Installation
 Now that the system is prepared, you need to install the necessary files onto your new root partition. Use the `pacstrap` command to download and install the base system into the /mnt directory from Arch Linux repositories:
 ```bash
-pacstrap /mnt base linux linux-firmware intel-ucode e2fsprogs dosfstools grub efibootmgr sudo base-devel linux-headers linux-lts linux-lts-headers sof-firmware networkmanager nano nvim man-db man-pages
+pacstrap /mnt base linux linux-firmware intel-ucode e2fsprogs dosfstools grub cryptsetup efibootmgr sudo base-devel linux-headers linux-lts linux-lts-headers sof-firmware networkmanager nano nvim man-db man-pages
 ```
 * Replace `intel-ucode` with `amd-ucode` if you have an AMD processor.
 * This command includes both standard and LTS kernels, essential system tools, editors, documentation, and bootloader packages.
@@ -247,6 +247,25 @@ useradd -m -G wheel -s /bin/bash john
 Set a password for it:
 ```bash
 passwd john
+```
+### 3.7. Edit mkinitcpio and Regenerate Initramfs
+Run the command to edit the mkinitcpio configuration:
+```bash
+nano /etc/mkinitcpio.conf
+```
+Scroll down to find the HOOKS line, which should look like this:
+```text
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
+```
+Modify this line by adding the encrypt hook immediately after the block hook, like so:
+```text
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
+```
+This tells mkinitcpio to include support for unlocking encrypted partitions during boot.
+
+After saving the file, regenerate the initramfs to apply changes:
+```bash
+mkinitcpio -P
 ```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
