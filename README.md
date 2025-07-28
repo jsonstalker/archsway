@@ -330,7 +330,7 @@ Enter the password to unlock the encrypted root partition.
 After that, the system will boot to the login screen (TTY).
 Here, enter your username and password to log in.
 
-To avoid typing your username and password every time you boot, you can enable automatic login on your virtual console. Open the getty@.service systemd unit file for editing:
+To avoid typing your username and password every time you boot, you can enable automatic login on your virtual console. Open the `getty@.service` systemd unit file for editing:
 ```bash
 sudo nano /lib/systemd/system/getty@.service
 ```
