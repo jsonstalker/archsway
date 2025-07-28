@@ -1,7 +1,7 @@
 # **My** Arch Linux + Sway Installation Guide
 <p align="center">
-  <img src="./archlinux-logo-dark-1200dpi.png" height="100" />
-  <img src="./sway-logo.png" height="100" />
+  <img src="./images/archlinux-logo-dark-1200dpi.png" height="100" />
+  <img src="./images/sway-logo.png" height="100" />
 </p
  
 Sources:
@@ -313,6 +313,7 @@ Regenerate GRUB configuration and apply the changes with:
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
