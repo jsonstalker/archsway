@@ -313,7 +313,40 @@ Regenerate GRUB configuration and apply the changes with:
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
-Hello World!!!!!!!!
+### 3.9 Enable NetworkManager on Boot 
+Run:
+```bash
+systemctl enable NetworkManager
+```
+## 4. Reboot
+Exit the chroot environment by typing `exit` or pressing `Ctrl` + `D`. Then type `reboot` and press `Enter`.
+
+When your system starts, the GRUB menu will appear.
+Select *Arch Linux* and press `Enter`.
+
+You will be prompted to enter the password for your encrypted volume.
+Enter the password to unlock the encrypted root partition.
+
+After that, the system will boot to the login screen (TTY).
+Here, enter your username and password to log in.
+
+To avoid typing your username and password every time you boot, you can enable automatic login on your virtual console. Open the getty@.service systemd unit file for editing:
+```bash
+sudo nano /lib/systemd/system/getty@.service
+```
+Locate the line starting with `ExecStart=`. Modify the line by removing everything from `-o` to `\\u`, then add `-a <your-username>` (replace <your-username> with your actual username, e.g., john). The line should look like this:
+```bash
+ExecStart=-/sbin/agetty -a john --noclear - $TERM
+```
+Reboot your machine to activate the changes. After restarting, you'll be logged in automatically on the console:
+```bash
+reboot
+```
+## 5. Post-installation
+### 5.1. Enabling auto-login
+
+
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
