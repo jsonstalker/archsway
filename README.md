@@ -343,8 +343,6 @@ Reboot your machine to activate the changes. After restarting, you'll be logged 
 reboot
 ```
 ## 5. Post-installation
-### 5.1. Enabling auto-login
-
 
 
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
