@@ -268,32 +268,26 @@ After saving the file, regenerate the initramfs to apply changes:
 mkinitcpio -P
 ```
 ### 3.8. Setting Up GRUB
-Follow these steps to configure GRUB for an encrypted root partition on a UEFI system.
-#### 3.8.1. Install GRUB for UEFI
-
-Run:
-
+Run the following command to install GRUB for a UEFI system:
 ```bash
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=[BOOTLOADER_ID] --removable /dev/nvme0n1
 ```
 * Replace [BOOTLOADER_ID] with a name like GRUB.
 * Change /dev/nvme0n1 if your main disk differs.
-#### 3.8.2. Retrieve Partition UUIDs
 
 Get the UUID for your encrypted partition and the decrypted root:
 ```bash
 blkid -o value -s UUID /dev/nvme0n1p3         # Encrypted partition UUID
 blkid -o value -s UUID /dev/mapper/cryptroot  # Decrypted (opened) root UUID
 ```
-Tip: Review the output in the terminal for accuracy.
-#### 3.8.3. Append UUID Output for Easy Access
+Tip: Review the output in the terminal for accuracy.\
+
 Send the UUIDs to the end of your GRUB config file:
 ```bash
 blkid -o value -s UUID /dev/nvme0n1p3 >> /etc/default/grub
 blkid -o value -s UUID /dev/mapper/cryptroot >> /etc/default/grub
 ```
-#### 3.8.4. Edit the GRUB Configuration
-Open the configuration file:
+Edit the GRUB Configuration:
 ```bash
 nano /etc/default/grub
 ```
@@ -303,7 +297,7 @@ Locate the line starting with:
 ```text
 GRUB_CMDLINE_LINUX_DEFAULT=
 ```
-Directly after the word quiet (still inside the quotes), paste and edit into this format (all on one line):
+Directly after the word `quiet` (still inside the quotes), paste and edit into this format (all on one line):
 ```text
 cryptdevice=UUID=ENCRYPTED_UUID:cryptroot root=UUID=DECRYPTED_UUID
 ```
@@ -314,8 +308,8 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=abcd1234-ef56-...:cryptroot r
 Remove the UUID lines from the end of the file to keep things tidy.
 
 Save changes (Ctrl+O, Enter), then exit (Ctrl+X).
-#### 3.8.5. Regenerate GRUB Configuration
-Apply the changes with:
+
+Regenerate GRUB configuration and apply the changes with:
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
