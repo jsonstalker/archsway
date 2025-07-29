@@ -307,7 +307,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=abcd1234-ef56-...:cryptroot r
 ```
 Remove the UUID lines from the end of the file to keep things tidy.
 
-Save changes (Ctrl+O, Enter), then exit (Ctrl+X).
+Save changes (`Ctrl` + `O`, `Enter`), then exit (`Ctrl` + `X`).
 
 Regenerate GRUB configuration and apply the changes with:
 ```bash
@@ -365,7 +365,7 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] ; th
 fi
 ```
 Save and exit Nano:
-* Press `Ctrl` + `O`, then Enter to save.
+* Press `Ctrl` + `O`, then `Enter` to save.
 * Press `Ctrl` + `X` to exit.
 
 After reboot, signing in on TTY1 will automatically launch your Sway session.
@@ -393,7 +393,7 @@ Replace `foot` with `kitty` so it reads:
 set $term kitty
 ```
 Save your changes:
-* Press `Ctrl` + `O`, then Enter to write the file.
+* Press `Ctrl` + `O`, then `Enter` to write the file.
 * Press `Ctrl` + `X` to exit Nano.
 
 Reload Sway’s configuration (no need to log out or restart Sway completely):
@@ -416,7 +416,7 @@ Replace `wmenu --run` with `wofi --show drun` so it reads:
 set $menu wofi --show drun
 ```
 Save your changes:
-* Press `Ctrl` + `O`, then Enter to write the file.
+* Press `Ctrl` + `O`, then `Enter` to write the file.
 * Press `Ctrl` + `X` to exit Nano.
 
 To apply the changes, reload Sway’s configuration:
@@ -447,6 +447,21 @@ Reload Sway’s configuration without restarting your session by pressing:
 ```text
 Super + Shift + C
 ```
+### 5.1.4. Adding a Keyboard Layout to Sway 
+Edit your Sway configuration file:
+```bash
+nano ~/.config/sway/config
+```
+Add or modify the input section to include your desired keyboard layouts and options. For example, to add German (de) alongside US English with `Alt` + `Shift` toggling:
+```text
+input * {
+    xkb_layout us,de
+    xkb_options grp:alt_shift_toggle
+}
+```
+Save your changes (`Ctrl` + `O`, then `Enter`) and exit Nano (`Ctrl` + `X`).
+
+Reload Sway’s configuration to apply the changes without restarting the session: Press `Super` + `Shift` + `C`
 ### 5.2. Connecting to Wi-Fi
 List available Wi-Fi networks:
 ```bash
@@ -502,8 +517,8 @@ GRUB_TIMEOUT=-1
 This setting makes GRUB wait indefinitely at the menu until you make a selection.
 
 Save and exit the editor:
-* Press Ctrl + O, then Enter to save.
-* Press Ctrl + X to exit Nano.
+* Press `Ctrl` + `O`, then `Enter` to save.
+* Press `Ctrl` + `X` to exit Nano.
 
 
 Update GRUB to apply the changes:
@@ -535,7 +550,7 @@ Add the following line to link the stylesheet:
 ```bash
 stylesheet=style.css
 ```
-Save and exit (`Ctrl` + `O`, then Enter, followed by `Ctrl` + `X`).
+Save and exit (`Ctrl` + `O`, then `Enter`, followed by `Ctrl` + `X`).
 
 Customize Wofi appearance and behavior:
 * You can style Wofi by editing the `~/.config/wofi/style.css` file.
@@ -546,14 +561,56 @@ Customize config options in ~/.config/wofi/config. Here are some common examples
 ```text
 prompt=Run:
 ```
-Hide the scrollbar:
+* Hide the scrollbar:
 ```text
 hide_scroll=true
 ```
-Set the launch mode (e.g., application launcher):
+* Set the launch mode (e.g., application launcher):
 ```text
 mode=drun
 ```
+### 5.7. Enabling Dark Mode for GTK3 and GTK4 Applications
+For GTK3 Applications, create the configuration directory if it doesn’t exist:
+```bash
+mkdir -p ~/.config/gtk-3.0
+```
+Create or edit the settings.ini file:
+```bash
+nano ~/.config/gtk-3.0
+```
+Add the following content to enable dark mode:
+```text
+[Settings]
+gtk-application-prefer-dark-theme=1
+```
+Save and exit (`Ctrl` + `O`, then `Enter`, followed by `Ctrl` + `X`).
+
+For GTK4 Applications, create the configuration directory if it doesn’t exist:
+```bash
+mkdir -p ~/.config/gtk-4.0
+```
+Create or edit the settings.ini file:
+```bash
+nano ~/.config/gtk-4.0
+```
+Add the following content to prefer dark mode:
+```text
+[AdwStyleManager]
+color-scheme=ADW_COLOR_SCHEME_PREFER_DARK
+```
+Save and exit (`Ctrl` + `O`, then `Enter`, followed by `Ctrl` + `X`).
+
+### 5.8. Configuring Kitty
+Create the Kitty configuration directory (if it doesn't exist):
+```bash
+mkdir -p ~/.config/kitty
+```
+Create or open the kitty.conf file for editing:
+```bash
+nano ~/.config/kitty/kitty.conf
+```
+Customize Kitty by adding your preferred settings in this file. For detailed options and examples, refer to the [official Kitty configuration documentation](https://sw.kovidgoyal.net/kitty/conf/).
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
