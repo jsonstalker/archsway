@@ -359,7 +359,7 @@ To automatically start Sway when you log into a TTY, edit your `.bash_profile`, 
 nano ~/.bash_profile
 ```
 Add the following code at the end of the file:
-```bash
+```text
 if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] ; then
 	exec sway --unsupported-gpu
 fi
@@ -371,7 +371,7 @@ Save and exit Nano:
 After reboot, signing in on TTY1 will automatically launch your Sway session.
 
 For setting kitty as the default terminal in Sway create the Sway configuration directory (if it doesn’t already exist):
-``bash
+```bash
 mkdir -p ~/.config/sway 
 ```
 Copy the default Sway config file to your user directory:
