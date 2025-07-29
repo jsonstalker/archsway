@@ -353,7 +353,6 @@ Notes:
 * When prompted to select a default font during installation, choose Noto Sans—it offers broad language support and excellent readability.
 
 Follow the instructions in the [Arch Linux NVIDIA drivers installation guide repository](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide) to properly install the proprietary NVIDIA drivers for your system.
-* Be sure to read and follow each step carefully from the guide to ensure optimal compatibility with your hardware and Wayland/Sway environment.
 
 To automatically start Sway when you log into a TTY, edit your `.bash_profile`, open `.bash_profile` in the Nano editor:
 ```bash
@@ -371,6 +370,34 @@ Save and exit Nano:
 
 After reboot, signing in on TTY1 will automatically launch your Sway session.
 
+For setting kitty as the default terminal in Sway create the Sway configuration directory (if it doesn’t already exist):
+``bash
+mkdir -p ~/.config/sway 
+```
+Copy the default Sway config file to your user directory:
+```bash
+cp /etc/sway/config ~/.config/sway/config
+```
+Edit the configuration file with Nano:
+```bash
+nano ~/.config/sway/config
+```
+Locate the line that sets the terminal, typically:
+```text
+set $term foot
+```
+Replace foot with kitty so it reads:
+```text
+set $term kitty
+```
+Save your changes:
+* Press `Ctrl` + `O`, then Enter to write the file.
+* Press `Ctrl` + `X` to exit Nano.
+
+Reload Sway’s configuration (no need to log out or restart Sway completely):
+* Press `Super` + `Shift` + `C` (the Super key is usually the Windows key).
+
+Now, when you press `Super` + `Enter` in Sway, Kitty will be launched as your default terminal.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
