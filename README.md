@@ -386,7 +386,7 @@ Locate the line that sets the terminal, typically:
 ```text
 set $term foot
 ```
-Replace foot with kitty so it reads:
+Replace `foot` with `kitty` so it reads:
 ```text
 set $term kitty
 ```
@@ -398,6 +398,27 @@ Reload Sway’s configuration (no need to log out or restart Sway completely):
 * Press `Super` + `Shift` + `C` (the Super key is usually the Windows key).
 
 Now, when you press `Super` + `Enter` in Sway, Kitty will be launched as your default terminal.
+
+For setting Wofi as the default app launcher edit the Sway config file:
+```bash
+nano ~/.config/sway/config
+```
+Find the line that defines the application launcher, which usually looks like this:
+```bash
+set $menu wmenu --run
+```
+Replace `wmenu --run` with `wofi --show drun` so it reads:
+```text
+set $menu wofi --show drun
+```
+Save your changes:
+* Press `Ctrl` + `O`, then Enter to write the file.
+* Press `Ctrl` + `X` to exit Nano.
+
+To apply the changes, reload Sway’s configuration:
+```text
+Super + Shift + C
+```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
