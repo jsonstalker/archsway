@@ -370,6 +370,8 @@ Save and exit Nano:
 
 After reboot, signing in on TTY1 will automatically launch your Sway session.
 
+### 5.2. Set Kitty as the Default Terminal in Sway
+
 For setting kitty as the default terminal in Sway create the Sway configuration directory (if it doesn’t already exist):
 ```bash
 mkdir -p ~/.config/sway 
@@ -399,6 +401,8 @@ Reload Sway’s configuration (no need to log out or restart Sway completely):
 
 Now, when you press `Super` + `Enter` in Sway, Kitty will be launched as your default terminal.
 
+### 5.3. Set Wofi as the Default Application Launcher
+
 For setting Wofi as the default app launcher edit the Sway config file:
 ```bash
 nano ~/.config/sway/config
@@ -419,6 +423,7 @@ To apply the changes, reload Sway’s configuration:
 ```text
 Super + Shift + C
 ```
+Now, when you press `Super` + `D` in Sway, Wofi will be launched as your default application launcher.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
