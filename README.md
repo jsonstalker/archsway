@@ -424,6 +424,19 @@ To apply the changes, reload Sway’s configuration:
 Super + Shift + C
 ```
 Now, when you press `Super` + `D` in Sway, Wofi will be launched as your default application launcher.
+### 5.4. Connecting to Wi-Fi
+List available Wi-Fi networks:
+```bash
+nmcli device wifi list
+```
+Connect to a Wi-Fi network:
+```bash
+nmcli device wifi connect "SSID" password "YourPassword"
+```
+* Replace "SSID" with the exact name of your Wi-Fi network.
+* Replace "YourPassword" with the network password.
+
+> The nmcli command-line tool is a part of NetworkManager that manages network connections, including Wi-Fi, via NetworkManager’s interface.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
