@@ -352,8 +352,25 @@ Notes:
 * Whenever you update Sway, it's a good idea to also update any related Wayland utilities (such as wlroots) to ensure compatibility.
 * When prompted to select a default font during installation, choose Noto Sans—it offers broad language support and excellent readability.
 
-Now install NVIDIA proprietary drivers using this Github repo:
-[Arch Linux NVIDIA drivers installation guide](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide)
+Follow the instructions in the [Arch Linux NVIDIA drivers installation guide repository](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide) to properly install the proprietary NVIDIA drivers for your system.
+* Be sure to read and follow each step carefully from the guide to ensure optimal compatibility with your hardware and Wayland/Sway environment.
+
+To automatically start Sway when you log into a TTY, edit your `.bash_profile`, open `.bash_profile` in the Nano editor:
+```bash
+nano ~/.bash_profile
+```
+Add the following code at the end of the file:
+```bash
+if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] ; then
+	exec sway --unsupported-gpu
+fi
+```
+Save and exit Nano:
+* Press `Ctrl` + `O`, then Enter to save.
+* Press `Ctrl` + `X` to exit.
+
+After reboot, signing in on TTY1 will automatically launch your Sway session.
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
