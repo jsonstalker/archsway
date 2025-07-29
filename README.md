@@ -370,7 +370,7 @@ Save and exit Nano:
 
 After reboot, signing in on TTY1 will automatically launch your Sway session.
 
-### 5.2. Set Kitty as the Default Terminal in Sway
+#### 5.1.1. Set Kitty as the Default Terminal
 
 For setting kitty as the default terminal in Sway create the Sway configuration directory (if it doesn’t already exist):
 ```bash
@@ -401,7 +401,7 @@ Reload Sway’s configuration (no need to log out or restart Sway completely):
 
 Now, when you press `Super` + `Enter` in Sway, Kitty will be launched as your default terminal.
 
-### 5.3. Set Wofi as the Default Application Launcher in Sway
+#### 5.1.2. Set Wofi as the Default Application Launcher
 
 For setting Wofi as the default app launcher edit the Sway config file:
 ```bash
@@ -424,7 +424,30 @@ To apply the changes, reload Sway’s configuration:
 Super + Shift + C
 ```
 Now, when you press `Super` + `D` in Sway, Wofi will be launched as your default application launcher.
-### 5.4. Connecting to Wi-Fi
+#### 5.1.3. Changing the Font in Sway
+Install your desired font, for example, Fira Code:
+```bash
+sudo pacman -S ttf-fira-code
+```
+> On Arch-based systems, the ttf-fira-code package includes the Fira Code font.
+
+Edit your Sway configuration file: 
+```bash
+nano ~/.config/sway/config
+```
+Add or modify the font setting by adding the following line:
+```text
+font pango:Fira Code 11
+```
+* This sets the font to Fira Code with size 11 using Pango font rendering (recommended for better font support).
+
+Save the file (`Ctrl` + `O`, then `Enter`) and exit (`Ctrl` + `X`).
+
+Reload Sway’s configuration without restarting your session by pressing:
+```text
+Super + Shift + C
+```
+### 5.2. Connecting to Wi-Fi
 List available Wi-Fi networks:
 ```bash
 nmcli device wifi list
@@ -437,6 +460,100 @@ nmcli device wifi connect "SSID" password "YourPassword"
 * Replace "YourPassword" with the network password.
 
 > The nmcli command-line tool is a part of NetworkManager that manages network connections, including Wi-Fi, via NetworkManager’s interface.
+### 5.3. Installing and Configuring Audio with PipeWire 
+Install the pipewire-pulse package:
+```bash
+sudo pacman -S pipewire-pulse
+```
+This package provides PulseAudio compatibility using PipeWire.
+
+Enable and start the PipeWire user service:
+```bash
+systemctl --user enable --now pipewire.service
+```
+This command enables the PipeWire audio service to start automatically at login and starts it immediately.
+### 5.4. Unzipping and Unraring Files via Command Line 
+Install the unzip package (for handling .zip files):
+```bash
+sudo pacman -S unzip
+```
+Extract a .zip archive:
+```bash
+unzip CompressedFile.zip
+```
+Install the unrar package (for handling .rar files):
+```bash
+sudo pacman -S unrar
+```
+Extract a .rar archive:
+```bash
+unrar x CompressedFile.rar
+```
+>  Using `unrar x` extracts files with full paths. Alternatively, `unrar e` CompressedFile.rar extracts files to the current directory without recreating folder structure.
+### 5.5. Removing the GRUB Menu Countdown
+Open the GRUB configuration file with a text editor, for example Nano:
+```bash
+nano /etc/default/grub
+```
+Find the line starting with GRUB_TIMEOUT and change its value to -1:
+```text
+GRUB_TIMEOUT=-1
+```
+This setting makes GRUB wait indefinitely at the menu until you make a selection.
+
+Save and exit the editor:
+* Press Ctrl + O, then Enter to save.
+* Press Ctrl + X to exit Nano.
+
+
+Update GRUB to apply the changes:
+```bash
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+Reboot your system to see the effect:
+```bash
+reboot
+```
+### 5.6. Configuring Wofi
+Create the Wofi configuration directory:
+```bash
+mkdir -p ~/.config/wofi
+```
+Create the main configuration file:
+```bash
+touch ~/.config/wofi/config
+```
+Create a CSS stylesheet file for customizing appearance:
+```bash
+touch ~/.config/wofi/style.css
+```
+Now Link the stylesheet in the Wofi config. Open the config file with your editor, for example Nano:
+```bash
+nano ~/.config/wofi/config
+```
+Add the following line to link the stylesheet:
+```bash
+stylesheet=style.css
+```
+Save and exit (`Ctrl` + `O`, then Enter, followed by `Ctrl` + `X`).
+
+Customize Wofi appearance and behavior:
+* You can style Wofi by editing the `~/.config/wofi/style.css` file.
+* Refer to the [official Wofi documentation](https://cloudninja.pw/docs/wofi.html) for detailed customization options.
+
+Customize config options in ~/.config/wofi/config. Here are some common examples you can add or modify:
+* Change the prompt text:
+```text
+prompt=Run:
+```
+Hide the scrollbar:
+```text
+hide_scroll=true
+```
+Set the launch mode (e.g., application launcher):
+```text
+mode=drun
+```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
