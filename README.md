@@ -401,14 +401,14 @@ Reload Sway’s configuration (no need to log out or restart Sway completely):
 
 Now, when you press `Super` + `Enter` in Sway, Kitty will be launched as your default terminal.
 
-### 5.3. Set Wofi as the Default Application Launcher
+### 5.3. Set Wofi as the Default Application Launcher in Sway
 
 For setting Wofi as the default app launcher edit the Sway config file:
 ```bash
 nano ~/.config/sway/config
 ```
 Find the line that defines the application launcher, which usually looks like this:
-```bash
+```text
 set $menu wmenu --run
 ```
 Replace `wmenu --run` with `wofi --show drun` so it reads:
