@@ -447,7 +447,7 @@ Reload Sway’s configuration without restarting your session by pressing:
 ```text
 Super + Shift + C
 ```
-### 5.1.4. Adding a Keyboard Layout to Sway 
+#### 5.1.4. Adding a Keyboard Layout to Sway 
 Edit your Sway configuration file:
 ```bash
 nano ~/.config/sway/config
