@@ -343,8 +343,17 @@ Reboot your machine to activate the changes. After restarting, you'll be logged 
 reboot
 ```
 ## 5. Post-installation
+### 5.1. Installing and configuring Sway
+To install Sway and recommended tools, run:
+```bash
+sudo pacman -S sway swaylock swaybg wofi kitty
+```
+Notes:
+* Whenever you update Sway, it's a good idea to also update any related Wayland utilities (such as wlroots) to ensure compatibility.
+* When prompted to select a default font during installation, choose Noto Sans—it offers broad language support and excellent readability.
 
-
+Now install NVIDIA proprietary drivers using this Github repo:
+[Arch Linux NVIDIA drivers installation guide](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide)
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
