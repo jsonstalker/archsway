@@ -657,8 +657,8 @@ rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
 > [!TIP]
 > I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
 
-> [!RECOMMENDATIONS]
-> Key information users need to know to achieve their goal.
+> **Recommendation:**
+> Whenever possible, consider using AppImages for desktop applications—they are convenient, cross-distro compatible, and can be removed without leaving traces on your system.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
