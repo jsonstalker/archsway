@@ -480,6 +480,8 @@ First, update your system and install the wob package, which provides a graphica
 ```bash
 sudo pacman -Syu
 sudo pacman -S wob
+```
+Edit your Sway configuration file (~/.config/sway/config) and add the following lines:
 ```text
 # Create a FIFO for wob and start wob listening on it
 exec mkfifo -m 600 /tmp/wob-volume
