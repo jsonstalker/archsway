@@ -481,13 +481,13 @@ First, update your system and install the wob package, which provides a graphica
 sudo pacman -Syu
 sudo pacman -S wob
 ```
-Edit your Sway configuration file (~/.config/sway/config) and add the following lines:
+Edit your Sway configuration file (`~/.config/sway/config`) and add the following lines:
 ```text
 # Create a FIFO for wob and start wob listening on it
 exec mkfifo -m 600 /tmp/wob-volume
 exec tail -f /tmp/wob-volume | wob
 ```
-* This sets up a named pipe (/tmp/wob-volume) that wob listens to for volume level updates.
+* This sets up a named pipe (`/tmp/wob-volume`) that wob listens to for volume level updates.
 
 Next, remove or comment out the existing audio-related bindings for volume and microphone control, which look like this:
 ```text
@@ -510,7 +510,7 @@ bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ to
 ```
 * With these keybindings, every time you mute/unmute or change the volume or microphone mute status, an overlay bar will display the current volume or microphone level.
 > [!NOTE]
-> Make sure that pipewire-pulse is installed and running, since pactl commands work with PipeWire’s PulseAudio compatibility layer.
+> Make sure that `pipewire-pulse` is installed and running, since `pactl` commands work with PipeWire’s PulseAudio compatibility layer.
 ### 5.2. Connecting to Wi-Fi
 List available Wi-Fi networks:
 ```bash
