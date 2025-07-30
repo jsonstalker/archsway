@@ -281,7 +281,7 @@ blkid -o value -s UUID /dev/nvme0n1p3         # Encrypted partition UUID
 blkid -o value -s UUID /dev/mapper/cryptroot  # Decrypted (opened) root UUID
 ```
 > [!TIP]
-> I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
+> Review the output in the terminal for accuracy.
 
 Send the UUIDs to the end of your GRUB config file:
 ```bash
