@@ -280,7 +280,8 @@ Get the UUID for your encrypted partition and the decrypted root:
 blkid -o value -s UUID /dev/nvme0n1p3         # Encrypted partition UUID
 blkid -o value -s UUID /dev/mapper/cryptroot  # Decrypted (opened) root UUID
 ```
-Tip: Review the output in the terminal for accuracy.\
+> [!TIP]
+> I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
 
 Send the UUIDs to the end of your GRUB config file:
 ```bash
@@ -462,6 +463,18 @@ input * {
 Save your changes (`Ctrl` + `O`, then `Enter`) and exit Nano (`Ctrl` + `X`).
 
 Reload Sway’s configuration to apply the changes without restarting the session: Press `Super` + `Shift` + `C`
+#### 5.1.5. (Optional) Minimize Window Title Bars in Sway
+By default, Sway displays a border and title bar around windows. You can reduce this visual clutter by setting thinner borders.
+
+Open your Sway configuration file for editing:
+```bash
+nano ~/.config/sway/config
+```
+Add the following lines to set a minimal 1-pixel border for normal and floating windows:
+```text
+default_border pixel 1
+default_floating_border pixel 1
+```
 ### 5.2. Connecting to Wi-Fi
 List available Wi-Fi networks:
 ```bash
@@ -643,6 +656,7 @@ rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
 ```
 > [!TIP]
 > I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
+
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
