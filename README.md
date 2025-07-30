@@ -475,6 +475,40 @@ Add the following lines to set a minimal 1-pixel border for normal and floating 
 default_border pixel 1
 default_floating_border pixel 1
 ```
+#### 5.1.6. Adding an Overlay Bar for Volume and Microphone in Sway
+First, update your system and install the wob package, which provides a graphical volume bar overlay.
+```bash
+sudo pacman -Syu
+sudo pacman -S wob
+```text
+# Create a FIFO for wob and start wob listening on it
+exec mkfifo -m 600 /tmp/wob-volume
+exec tail -f /tmp/wob-volume | wob
+```
+* This sets up a named pipe (/tmp/wob-volume) that wob listens to for volume level updates.
+
+Next, remove or comment out the existing audio-related bindings for volume and microphone control, which look like this:
+```text
+# Special keys to adjust volume via PulseAudio
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+```
+Then, replace them with these updated bindings that toggle mute/unmute and adjust volume while updating the overlay bar:
+```text
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && (pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo 0 > /tmp/wob-volume || pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | grep -oE '[0-9]+' > /tmp/wob-volume)
+
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | grep -oE '[0-9]+' > /tmp/wob-volume
+
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]+%' | head -1 | grep -oE '[0-9]+' > /tmp/wob-volume
+
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && (pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo 0 > /tmp/wob-volume || echo 100 > /tmp/wob-volume)
+
+```
+* With these keybindings, every time you mute/unmute or change the volume or microphone mute status, an overlay bar will display the current volume or microphone level.
+> [!NOTE]
+> Make sure that pipewire-pulse is installed and running, since pactl commands work with PipeWire’s PulseAudio compatibility layer.
 ### 5.2. Connecting to Wi-Fi
 List available Wi-Fi networks:
 ```bash
@@ -657,8 +691,46 @@ rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
 > [!TIP]
 > I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
 
-> **Recommendation:**
-> Whenever possible, consider using AppImages for desktop applications—they are convenient, cross-distro compatible, and can be removed without leaving traces on your system.
+## 6. Supplementary:
+### 6.1. Use AppImages
+Whenever possible, consider using AppImages for desktop applications. AppImages are portable, cross-distro compatible, and can be removed easily without leaving traces on your system.
+
+Before running AppImages, ensure fuse2 is installed:
+```bash
+sudo pacman -S fuse2
+```
+For some applications (like Obsidian and Bitwarden), you may also need:
+```bash
+sudo pacman -S xorg-wayland xdg-utils
+```
+Navigate to the directory where you downloaded the AppImage and run:
+```bash
+chmod +x AppImage_Name
+```
+* Replace `AppImage_Name` with the name of your downloaded AppImage file.
+
+Launch the AppImage:
+```bash
+./AppImage_Name
+```
+(Optional): If you installed new dependencies, reboot your system to ensure all changes take effect:
+```bash
+reboot
+```
+> [!TIP]
+> AppImages don’t require installation and can be deleted at any time. Just make them executable and run—no system modifications needed.
+### 6.2. Use BetterFox for Firefox Privacy
+[BetterFox](https://github.com/yokoffing/BetterFox) boosts Firefox privacy by disabling telemetry and blocking trackers.
+
+Place its user.js in your Firefox profile and restart.
+
+### 6.3 Fixing VLC Codec Issues
+If you experience problems playing certain media files in VLC, installing additional codec plugins can help.
+
+Run the following command to install all necessary VLC codecs and plugins:
+```bash
+sudo pacman -S vlc-plugins vlc-plugin-ffmpeg vlc-plugins-extra
+```
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
