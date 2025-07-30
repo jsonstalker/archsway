@@ -610,7 +610,39 @@ Create or open the kitty.conf file for editing:
 nano ~/.config/kitty/kitty.conf
 ```
 Customize Kitty by adding your preferred settings in this file. For detailed options and examples, refer to the [official Kitty configuration documentation](https://sw.kovidgoyal.net/kitty/conf/).
+### 5.9. Installing and Configuring rclone for Google Drive 
+Update your system and install rclone:
+```bash
+sudo pacman -Syu
+sudo pacman -S rclone
+```
+Set up your Google Drive remote with rclone. Open the rclone configuration interface:
+```bash
+rclone config
+```
+Follow the prompts to add a new remote for Google Drive (Refer to the [official rclone config guide](https://rclone.org/commands/rclone_config/) for detailed, up-to-date setup instructions.).
 
+Create a mount point for Google Drive:
+```bash
+mkdir -p gdrive
+```
+For Automatic mount Google Drive at login in Sway edit your Sway configuration file:
+```bash
+nano ~/.config/sway/config
+```
+Add this line to ensure your Google Drive is mounted on every Sway session start:
+```text
+exec rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
+```
+* Replace `gdrive` with your actual remote name if you used a different one.
+* `--vfs-cache-mode writes` ensures compatibility and reliable file operations with cloud storage.
+
+(Optional) Mount Google Drive manually if you don’t want automatic mounting or want to mount it on-demand, simply run:
+```bash
+rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
+```
+> [!TIP]
+> I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
