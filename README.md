@@ -693,7 +693,7 @@ rclone mount --vfs-cache-mode writes gdrive: ~/gdrive
 > [!TIP]
 > I personally use this setup to access my Obsidian notes stored on Google Drive—simply open `~/gdrive` in Obsidian to work directly with your cloud-synced files.
 
-## 6. Supplementary:
+## 6. Supplementary
 ### 6.1. Use AppImages
 Whenever possible, consider using AppImages for desktop applications. AppImages are portable, cross-distro compatible, and can be removed easily without leaving traces on your system.
 
