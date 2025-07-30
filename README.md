@@ -351,6 +351,7 @@ sudo pacman -S sway swaylock swaybg wofi kitty
 ```
 > [!NOTE]
 > Whenever you update Sway, it's a good idea to also update any related Wayland utilities (such as wlroots) to ensure compatibility.
+
 > When prompted to select a default font during installation, choose Noto Sans—it offers broad language support and excellent readability.
 
 Follow the instructions in the [Arch Linux NVIDIA drivers installation guide repository](https://github.com/korvahannu/arch-nvidia-drivers-installation-guide) to properly install the proprietary NVIDIA drivers for your system.
