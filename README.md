@@ -8,6 +8,7 @@ Sources:
 * [Installation guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide)
 * [Arch Linux: An 𝔼𝕟𝕔𝕣𝕪𝕡𝕥𝕖𝕕 Guide](https://youtu.be/kXqk91R4RwU?si=1yv3FowmuQ-yczeG)
 * [How to Install Arch Linux: Step-by-Step Guide](https://youtu.be/FxeriGuJKTM?si=CjofZtAmX6EIGYZT)
+* [Sway - ArchWiki](https://wiki.archlinux.org/title/Sway)
 ## 1. Pre-installation
 ### 1.1. Download an installation image
 An Arch Linux ISO file should be downloaded. It is recommended to download the Arch Linux ISO file from the [official Arch Linux download page](https://archlinux.org/download/) using BitTorrent, as suggested by the website.
