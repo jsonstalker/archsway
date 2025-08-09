@@ -741,7 +741,7 @@ Unlike traditional desktop environments, Sway does not have a conventional minim
 
 To put a window into the scratchpad (effectively "minimize" it) focus on the window you want to minimize, then press:
 ```text
-    Super + Ctrl + -
+Super + Ctrl + -
 ```
 * This moves the focused window to the scratchpad, hiding it from your current workspace.
 
