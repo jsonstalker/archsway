@@ -735,6 +735,27 @@ Run the following command to install all necessary VLC codecs and plugins:
 ```bash
 sudo pacman -S vlc-plugins vlc-plugin-ffmpeg vlc-plugins-extra
 ```
+## 7. Tips
+### 7.1. Minimizing Windows in Sway
+Unlike traditional desktop environments, Sway does not have a conventional minimize feature for windows. Instead, Sway uses a special feature called the scratchpad — a hidden workspace to which you can send windows temporarily.
+
+To put a window into the scratchpad (effectively "minimize" it) focus on the window you want to minimize, then press:
+```text
+    Super + Ctrl + -
+```
+* This moves the focused window to the scratchpad, hiding it from your current workspace.
+
+To bring back (show) windows stored in the scratchpad press:
+```text
+Super + -
+```
+* This will display the next window in the scratchpad. Repeating this shortcut cycles through all windows stored there.
+
+To bring a window back from the scratchpad to your current workspace (floating mode) press:
+```text
+Super + Shift + Space
+```
+* This transfers the focused scratchpad window back to the workspace, making it visible again.
 [^1]: Common [BIOS keys](https://www.tomshardware.com/reviews/bios-keys-to-access-your-firmware,5732.html) by brand:  
     | Manufacturer                | Key(s)                                           |
     |-----------------------------|--------------------------------------------------|
