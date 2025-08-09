@@ -28,6 +28,7 @@ Plug in a USB flash drive and write the ISO file to it using an app like [Balena
 Now reboot your system and open the UEFI (BIOS) firmware setup by pressing the respective key (for me it's F2[^1]). Disable **Secure Boot** (usually found in the Security tab). Also navigate to the boot tab and move the flash drive to the top of the boot order. Save the settings. Your PC will now boot into the live environment.
 
 After a bit of time the installation bootloader will appear. Select *Arch Linux install medium* and press `Enter`. You will be logged in on virtual console.
+>Note: Older computers usually use BIOS for booting, while newer ones use UEFI instead.
 ### 1.5. Verify the boot mode
 To verify the boot mode, check the UEFI bitness:
 ``` bash
